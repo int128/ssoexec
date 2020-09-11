@@ -1,4 +1,4 @@
-# ssoexec
+# ssoexec ![test](https://github.com/int128/ssoexec/workflows/test/badge.svg)
 
 This is a lightweight command to run a third-party tool with AWS SSO.
 It is written in Go and has no dependency.
