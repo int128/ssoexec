@@ -57,20 +57,28 @@ As well as you can export the environment variables.
 
 ## How it works
 
-ssoexec executes the following command to acquire short-term credentials:
+ssoexec respects the following environment variables:
+
+- `AWS_PROFILE` (current profile name)
+
+It loads the following parameters:
+
+- `~/.aws/config`
+  - Region, account ID and role name for SSO
+- `~/.aws/sso/cache`
+  - Access token retrieved via AWS SSO
+
+Then it acquires short-term credentials by the following command:
 
 ```sh
 aws sso get-role-credentials --role-name SSORoleName --region SSORegion --account-id SSOAccountID --access-token AccessToken
 ```
 
-It exports the following environment variables:
+Finally it exports the following environment variables:
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_SESSION_TOKEN`
-
-It loads the SSO related parameters of the current profile from `~/.aws/config`.
-It loads the access token from `~/.aws/sso/cache`.
 
 
 ## Contributions
