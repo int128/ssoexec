@@ -8,7 +8,7 @@ It is written in Go and has no dependency.
 
 Most of third-party tools such as Terraform do not support AWS SSO.
 To run a third-party tool, you need to acquire short-term credentials from AWS SSO
-and export them to the environment variables.
+and set them to the environment variables.
 
 ssoexec allows you to run a third-party tool with AWS SSO.
 
@@ -21,7 +21,7 @@ Install the latest release.
 % go get github.com/int128/ssoexec
 ```
 
-If needed, set the current profile.
+If needed, you can set the current profile.
 
 ```console
 % export AWS_PROFILE=example
@@ -42,16 +42,16 @@ Then enter the code:
 Successully logged into Start URL: https://********.awsapps.com/start
 ```
 
-Run ssoexec.
+Run a command with ssoexec.
+
+```console
+% ssoexec terraform
+```
+
+As well as you can export the environment variables.
 
 ```console
 % eval $(ssoexec)
-```
-
-Now you can run a third-party tool.
-
-```console
-% terraform
 ```
 
 
@@ -62,6 +62,12 @@ ssoexec executes the following command to acquire short-term credentials:
 ```sh
 aws sso get-role-credentials --role-name SSORoleName --region SSORegion --account-id SSOAccountID --access-token AccessToken
 ```
+
+It exports the following environment variables:
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_SESSION_TOKEN`
 
 It loads the SSO related parameters of the current profile from `~/.aws/config`.
 It loads the access token from `~/.aws/sso/cache`.
