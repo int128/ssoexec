@@ -1,0 +1,13 @@
+[default]
+region=us-west-2
+output=json
+
+# https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
+[profile development]
+region = us-east-1
+role_arn = arn:aws:iam::123456789012:role/role-name
+
+# for now do not support nested key
+s3 =
+  max_concurrent_requests = 20
+  max_bandwidth = 50MB/s
